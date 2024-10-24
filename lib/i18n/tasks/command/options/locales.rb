@@ -31,7 +31,7 @@ module I18n::Tasks
             parser: OptionParsers::Locale::Parser,
             default: 'base'
 
-        TRANSLATION_BACKENDS = %w[google deepl].freeze
+        TRANSLATION_BACKENDS = %w[openai google deepl].freeze
         arg :translation_backend,
             '-b',
             '--backend BACKEND',

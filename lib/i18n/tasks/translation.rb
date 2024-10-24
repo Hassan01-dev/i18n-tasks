@@ -2,6 +2,7 @@
 
 require 'i18n/tasks/translators/deepl_translator'
 require 'i18n/tasks/translators/google_translator'
+require 'i18n/tasks/translators/openai_translator'
 require 'i18n/tasks/translators/yandex_translator'
 
 module I18n::Tasks
@@ -10,8 +11,10 @@ module I18n::Tasks
     # @param [String] from locale
     # @param [:deepl, :google, :yandex] backend
     # @return [I18n::Tasks::Tree::Siblings] translated forest
-    def translate_forest(forest, from:, backend: :google)
+    def translate_forest(forest, from:, backend: :openai)
       case backend
+      when :openai
+        Translators::OpenAiTranslator.new(self).translate_forest(forest, from)
       when :deepl
         Translators::DeeplTranslator.new(self).translate_forest(forest, from)
       when :google
